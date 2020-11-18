@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+Choose Payment method
+{% endblock %}
+{% block favicon %}
+  <link rel="shortcut icon" href="{% static 'Images/favicon.ico' %}" type="image/x-icon">
+{% endblock %}
+{% block content %}
+    <div class="container w-75">
+        <div class="form-border">
+            <legend>Choose Payment Method</legend><hr>
+            <a href="{% url  'payment_paypal' pname id %}" class="btn btn-block" style="height:50px;background-color: rgb(255, 255, 255);font-weight:bold;color:white;border: 2px solid#00217d;"><img src="{% static 'Images/paypal.png' %}" alt="oops!Paypal image is not available."></a>
+
+        <a href="{% url  'payment_stripe' pname id %}" class="btn btn-block" style="font-weight:bold;border: 2px solid #6d58db;color:white;background-color: white;"><img style="height: 32px;width:85px;" src="{% static 'Images/stripe.png' %}" alt=""></a>
+   
+    </div>
+    <div class="container text-right">
+        <img style="width: 300px;height: 115px;"  class="img-fluid"  src="{% static 'Images/paypal_stripe.png' %}" border="0" alt="paypal stripe cards">
+    </div>
+{% endblock %}

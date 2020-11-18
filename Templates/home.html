@@ -1,0 +1,84 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}
+
+{% if user.is_authenticated %}
+Hello! ,
+{% if user.first_name %}{{user.first_name}}
+{% else %}{{user.username}}
+{% endif %}
+{% else %}
+Home
+{% endif %}
+
+{% endblock %}
+{% block favicon %}
+  <link rel="shortcut icon" href="{% static 'Images/favicon.ico' %}" type="image/x-icon">
+{% endblock %}
+{% block button %}
+<a href="{% url 'login' %}" class="form-control btn btn-success my-2 my-sm-0 mr-2">Login</a>
+<a href="{% url 'register' %}" class="form-control btn btn-info my-2 my-sm-0">Register</a>
+{% endblock %}
+
+{% block content %}
+{% if user.is_authenticated %}
+<br>
+<div class="container" style="border-left: 2px solid black; border-right: 2px solid black;">
+    <br>
+    <legend>Products</legend>
+    <hr>
+
+    <div class="row">
+        {% for product in products %}
+        <div class="col-lg-4 col-md-6 col-sm-12">
+            <div class="card" style="width: 250px;">
+                <img style="height: 250px;" src="{{product.product_img.url}}" alt="oops!! Image not available.">
+                <div class="card-body">
+                    <h4 class="card-title text-center"><a style="text-decoration: none;color: black;"
+                            href="/product/{{product.product_name}}/{{product.id}}">{{product.product_name}}</a>
+                    </h4>
+                    <p class="card-text text-center">{{product.product_details|slice:150}}.....</p>
+                    {% if product in purchased_product %}
+                    <a href="{% url 'download' product.product_name product.id %}"
+                        download="{% url 'download' product.product_name product.id %}"
+                        class="btn btn-warning d-block">Download</a>
+                    {% else %}
+                    <a href="/payment/{{product.product_name}}/{{product.id}}" class="btn btn-primary d-block">Buy
+                        ${{product.price}}</a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+
+
+    </div>
+    {% else %}
+    <br>
+<div class="container" style="border-left: 2px solid black; border-right: 2px solid black;">
+    <br>
+    <legend>Products</legend>
+    <hr>
+
+    <div class="row">
+        {% for product in products %}
+        <div class="col-lg-4 col-md-6 col-sm-12">
+            <div class="card" style="width: 250px;">
+                <img style="height: 250px;" src="{{product.product_img.url}}" alt="oops!! Image not available.">
+                <div class="card-body">
+                    <h4 class="card-title text-center"><a style="text-decoration: none;color: black;"
+                            href="/product/{{product.product_name}}/{{product.id}}">{{product.product_name}}</a>
+                    </h4>
+                    <p class="card-text text-center">{{product.product_details|slice:150}}.....</p>
+                    
+                    <a href="/payment/{{product.product_name}}/{{product.id}}" class="btn btn-primary d-block">Buy
+                        ${{product.price}}</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+
+{% endif %}
+
+
+    {%endblock %}

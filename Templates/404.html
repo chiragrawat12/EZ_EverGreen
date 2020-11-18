@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+Page Not Found!
+{% endblock %}
+{% block favicon %}
+  <link rel="shortcut icon" href="{% static 'Images/favicon.ico' %}" type="image/x-icon">
+{% endblock %}
+{% block content %}
+<div class="container">
+    <br>
+    <br>
+        <div class="jumbotron">
+            <h1>ERROR 404!</h1>
+            <p>This page does not exists!</p>
+            <br>
+            <a class="btn btn-warning" href="{% url 'home' %}">Go to Home</a>
+        </div>
+    </div>
+    {% endblock %}

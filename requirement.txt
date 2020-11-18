@@ -1,0 +1,25 @@
+asgiref==3.2.10
+certifi==2020.6.20
+chardet==3.0.4
+Django==3.1.1
+django-cors-headers==3.5.0
+django-crispy-forms==1.9.2
+django-filter==2.4.0
+django-utils-six==2.0
+djangorestframework==3.11.1
+Faker==4.1.3
+idna==2.10
+mysql-connector==2.2.9
+mysqlclient @ file:///C:/Users/chiragrawat12/Desktop/Django_Project/Test-Django/django_first_website/mysqlclient-1.4.6-cp38-cp38-win32.whl
+passlib==1.7.4
+Pillow==7.2.0
+PyMySQL==0.10.1
+python-dateutil==2.8.1
+python-decouple==3.3
+pytz==2020.1
+requests==2.24.0
+six==1.15.0
+sqlparse==0.3.1
+stripe==2.54.0
+text-unidecode==1.3
+urllib3==1.25.10

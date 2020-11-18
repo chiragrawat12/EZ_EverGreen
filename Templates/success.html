@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+Success
+{% endblock %}
+{% block favicon %}
+  <link rel="shortcut icon" href="{% static 'Images/favicon.ico' %}" type="image/x-icon">
+{% endblock %}
+{% block content %}
+<div class="container">
+    <br><br>
+    <div class="row">
+        <div class="col-md-3 img-fluid" style="margin: 50px auto;"><img src="{% static 'Images/credit-card.png' %}"
+                alt="Image is not available!">
+        </div>
+        <div class="jumbotron col-md-9">
+            <h1>Thankyou for purchasing our product!</h1>
+            <h4>You've successfully paid ${{amount}} for {{product.product_name}} through {{through}}.</h4>
+            <br>
+            <a class="btn btn-warning" href="{% url 'home' %}">Go to Home</a>
+        </div>
+    </div>
+    {% endblock %}

@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+{{product.product_name}}
+{% endblock %}
+{% block favicon %}
+  <link rel="shortcut icon" href="{% static 'Images/favicon.ico' %}" type="image/x-icon">
+{% endblock %}
+{% block button %}
+<a href="{% url 'login' %}" class="form-control btn btn-success my-2 my-sm-0 mr-2">Login</a>
+<a href="{% url 'register' %}" class="form-control btn btn-info my-2 my-sm-0">Register</a>
+{% endblock %}
+
+{% block content %}
+<br>
+<div class="container" style="border-right: 2px solid black;border-left: 2px solid black;">
+    <div class="row">
+        <div class="col-md-6">
+            <img src="{{product.product_img.url}}" class="img-fluid" alt="Responsive image">
+            <br><br>
+            {% if user.is_authenticated %}
+            {% if purchases %}
+            <a href="{% url 'download' product.product_name product.id %}"
+                download="{% url 'download' product.product_name product.id %}"
+                class="btn btn-warning d-block">Download</a>
+            {%else%}
+            <a href="/payment/{{product.product_name}}/{{product.id}}" class="btn btn-primary d-block">Buy
+                ${{product.price}}</a>
+            {% endif %}
+            {% else %}
+            <a href="/payment/{{product.product_name}}/{{product.id}}" class="btn btn-primary d-block">Buy
+                ${{product.price}}</a>
+            {% endif %}
+            <br>
+        </div>
+        <div class="col-md-6">
+            <h1>{{product.product_name}}</h1>
+            <hr>
+            <p class="text-justify">{{product.product_details}}</p>
+            <hr>
+        </div>
+    </div>
+
+    {% if product.product_link != None %}
+    <h2>How to use</h2>
+    <hr>
+    <div style=" width: 70%;
+    height: auto;text-align: center;" class="embed-responsive embed-responsive-16by9 card">
+        <iframe class="embed-responsive-item" src={{product.product_link}} allowfullscreen></iframe>
+    </div>
+    {% endif %}
+    <br><br>
+</div>
+
+{% endblock %}

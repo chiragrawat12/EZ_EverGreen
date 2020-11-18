@@ -1,0 +1,98 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+Paypal
+{% endblock title %}
+{% block favicon %}
+  <link rel="shortcut icon" href="{% static 'Images/paypal.ico' %}" type="image/x-icon">
+{% endblock %}
+{% block content %}
+<div></br></br>
+
+<div class="container">
+    <img class="img-fluid" src="https://www.paypalobjects.com/digitalassets/c/website/marketing/apac/IN/logo-center/logo-center-other-options-white-secured-pp.png" border="0" alt="Secured by PayPal">
+
+</div>   
+<div class = "w-75 form-border text-center" style="margin:auto;">
+<div id="paypal-button-container"></div>
+ <script src="https://www.paypal.com/sdk/js?client-id=AR59leyWOGERAY2mvuNzvBNjkoQ0Sv14qHHuW2vuzg6cZucqyMeAy6SNExnuBLANNRAHqH_xdRQ_NHVq&currency=USD"></script>
+ <script>
+        function getCookie(name) {
+        let cookieValue = null;
+        if (document.cookie && document.cookie !== '') {
+            const cookies = document.cookie.split(';');
+            for (let i = 0; i < cookies.length; i++) {
+                const cookie = cookies[i].trim();
+                // Does this cookie string begin with the name we want?
+                if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                    break;
+                }
+            }
+        }
+        return cookieValue;
+    }
+    const csrftoken = getCookie('csrftoken');
+
+
+
+
+    var total = '{{product.price}}'
+    var product_id ='{{product.id}}'
+    var product_name = '{{product.product_name}}'
+    function completeOrder(){
+        var url = "{% url 'payment_paypal' product.product_name product.id %}"
+        fetch(url,{
+            method:'POST',
+            headers:{
+                'Content-type':'application/json',
+                'X-CSRFToken':csrftoken,
+            },
+            body:JSON.stringify({'id':product_id,'pname':product_name,'amount':total})
+        })
+    }
+
+
+
+
+        // Render the PayPal button into #paypal-button-container
+        paypal.Buttons({
+            style: {
+                color:  'blue',
+                shape:  'rect',
+                label:  'pay',
+                height: 40
+            },
+
+            // Set up the transaction
+            createOrder: function(data, actions) {
+                return actions.order.create({
+                    purchase_units: [{
+                        amount: {
+                            value: total
+                        }
+                    }]
+                });
+            },
+
+            // Finalize the transaction
+            onApprove: function(data, actions) {
+                return actions.order.capture().then(function(details) {
+                    // Show a success message to the buyer
+                    completeOrder()
+                    alert('Transaction completed by ' + details.payer.name.given_name + '!');
+                    window.location.replace("/payment/success/{{product.product_name}}/{{product.id}}/{{product.price}}/Paypal")
+                });
+            }
+
+
+        }).render('#paypal-button-container');
+    </script>
+
+</div>
+<div class="container"  >
+<table  style="float: right;" border="0" cellpadding="10" cellspacing="0" align="center"><tr><td align="center"></td></tr><tr><td align="center"><a href="https://www.paypal.com/in/webapps/mpp/paypal-popup" title="How PayPal Works" onclick="javascript:window.open('https://www.paypal.com/in/webapps/mpp/paypal-popup','WIPaypal','toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=yes, resizable=yes, width=1060, height=700'); return false;"><img class="img-fluid" src="https://www.paypalobjects.com/digitalassets/c/website/marketing/apac/IN/logo-center/logo-center-solution-graphics.png" border="0" alt="PayPal Acceptance Mark"></a></td></tr></table>
+</div>
+</div>
+{% endblock content %}
