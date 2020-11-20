@@ -53,7 +53,7 @@ def contact(request):
             mail_subject,
             text_content,
             settings.EMAIL_HOST_USER,
-            ['chiragrawat12@gmail.com', ]
+            ['theevergreenhelp@gmail.com', ]
         )
         email.attach_alternative(message, "text/html")
         email.send(fail_silently=False)

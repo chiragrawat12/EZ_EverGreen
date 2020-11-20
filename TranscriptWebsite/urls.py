@@ -15,6 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from django.views.static import serve
 from django.conf.urls import url
 from django.conf import settings
 from django.conf.urls.static import static
@@ -49,10 +50,13 @@ urlpatterns = [
     path('api/publish_affiliate_link/', Publish_Affiliate_LinkListView.as_view()),
     path('api/resources_section/', Resources_SectionList.as_view()),
     path('api/resources_affiliate_link/', Resources_Affiliate_LinkListView.as_view()),
+    url(r'^media/(?P<path>.*)$', serve,{'document_root': settings.MEDIA_ROOT}), 
+    url(r'^static/(?P<path>.*)$', serve,{'document_root': settings.STATIC_ROOT}), 
     path('admin/', admin.site.urls),
-] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
-handler404 = 'user.views.handler404'
-handler500 = 'user.views.handler500'
-handler400 = 'user.views.handler400'
-handler403 = 'user.views.handler403'
+if settings.DEBUG==False:
+    handler404 = 'user.views.handler404'
+    handler500 = 'user.views.handler500'
+    handler400 = 'user.views.handler400'
+    handler403 = 'user.views.handler403'
