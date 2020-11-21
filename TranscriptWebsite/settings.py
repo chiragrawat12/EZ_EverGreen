@@ -25,7 +25,7 @@ SECRET_KEY = "zmrzq$eo0#+$_44y^t_w3e+h3f+7#nppkxp#vqpa@%o#8-&+)5"
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['127.0.0.1']
+ALLOWED_HOSTS = ['3.14.143.156']
 
 
 # Application definition
@@ -83,11 +83,11 @@ WSGI_APPLICATION = 'TranscriptWebsite.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': config('NAME'),
-        'USER': config('USER'),
-        'PASSWORD': config('PASSWORD'),
-        'HOST': config('HOST'),
-        'PORT': config('PORT'),
+        'NAME': 'ezevergreendb',
+        'USER': 'akmauri',
+        'PASSWORD': 'Ak1Mauri9',
+        'HOST': 'ez-evergreen-dbms.cffbbwo8j2vv.us-east-2.rds.amazonaws.com',
+        'PORT': '3306',
         'OPTION': {'init_command': "SET sql_mode = 'STRICT_TRANS_TABLE',"},
     }
 }
