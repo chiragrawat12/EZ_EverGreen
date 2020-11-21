@@ -9,10 +9,9 @@ from django.template.loader import render_to_string
 from django.utils.html import strip_tags
 from django.conf import settings
 import stripe
-from decouple import config
 import json
 
-stripe.api_key = config('STRIPE_API_KEY')
+stripe.api_key = 'sk_live_DVPc2X1DUQAmyD8xLo9Uh56Jy'
 
 
 @login_required(login_url='login')
