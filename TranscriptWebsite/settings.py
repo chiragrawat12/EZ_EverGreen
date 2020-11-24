@@ -25,7 +25,7 @@ SECRET_KEY = "zmrzq$eo0#+$_44y^t_w3e+h3f+7#nppkxp#vqpa@%o#8-&+)5"
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['3.14.143.156']
+ALLOWED_HOSTS = ['ezevergreen.com','ec2-3-135-227-254.us-east-2.compute.amazonaws.com','3.135.227.254','www.ezevergreen.com']
 
 
 # Application definition
